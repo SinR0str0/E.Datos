@@ -12,6 +12,9 @@ Se desea construir un programa que cuenta con las siguientes funciones de lectur
 3) Dada una matriz 6x6, leer los elementos de la matriz en forma de "Z" de abajo hacia arriba.
 4) Dada una matriz 3x4, leer los elementos de la matriz en forma "invertida", es decir, 
 	de derecha a izquierda y de abajo hacia arriba.
+Todos los programas están adaptados para que funcionen con cualquier matriz nxm, solo será
+necesario modificar las directivas, la declaración inicial de las matrices a utilizar, y 
+las llamadas a las funciones (prototipos y llamadas en main).
 */
 
 #include <stdio.h>
@@ -161,20 +164,26 @@ void leerZ(int mat[m][m]){
 	25 26 27 28 29 30
 	31 32 33 34 35 36
 	Resultado: 1,2,3,4,5,6,11,16,21,26,31,32,33,34,35,36. 
+	El código está predeterminado para que funcione con matices cuadradas de valor m, sin embargo,
+	está adaptado para que funcione con cualquier matriz nxm, para ello, deberás modificar 
+	el prototipo de esta función, las directivas define del tamaño m, la declaración de impresión y el arreglo a enviar desde el main.
+	Esto está en el switch de case mZ.
 	*/
-	int i, j;
-	for(i=0; i<m; i++){
-		if(i==0 || i==m-1){
-			for(j=0; j<m; j++){
+	int i, maxf=m-1, maxc=m-1, var, j=0;
+	var= (maxf-maxc>0)?(maxf-maxc)+1:maxf;
+	
+	for(i=0; i<=var; i++){
+		if(i==0 || i==var){
+			while(j<=maxc){
 				printf(" %d ", mat[i][j]);
+				j++;
 			}
-			j--;
+			j-=2;
 		}
 		else{
-			j--;
 			printf(" %d ", mat[i][j]);
+			j--;
 		}
-		
 	}
 }
 
@@ -189,21 +198,27 @@ void leerZ2(int mat[m][m]){
 	25 26 27 28 29 30
 	31 32 33 34 35 36
 	Resultado: 36,35,34,33,32,31,26,21,16,11,6,5,4,3,2,1. 
+	El código está predeterminado para que funcione con matices cuadradas de valor m, sin embargo,
+	está adaptado para que funcione con cualquier matriz nxm, para ello, deberás modificar 
+	el prototipo de esta función, las directivas define del tamaño m, la declaración de impresión y el arreglo a enviar desde el main.
+	Esto está en el switch de case mZ2.
 	*/
-	int i, j;
-	for(i=m-1; i>=0; i--){
-		if(i==0 || i==m-1){
-			for(j=m-1; j>=0; j--){
+	int i, maxf=m-1, maxc=m-1, var, j=maxc;
+	var=(m-m>0)?(m-m)+1:0;
+	
+	for(i=maxf; i>=var; i--){
+		if(i==var || i==maxf){
+			while(j>=0){
 				printf(" %d ", mat[i][j]);
+				j--;
 			}
-			j++;
+			j=1;
 		}
 		else{
-			j++;
 			printf(" %d ", mat[i][j]);
+			j++;
 		}
-		
-	}
+	}	
 }
 
 void leerA(int mat[x][n]){
