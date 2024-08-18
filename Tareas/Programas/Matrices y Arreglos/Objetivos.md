@@ -15,4 +15,4 @@ Se requiere desarrollar un programa que implemente funciones para leer matrices 
 3. **Matriz 6x6**: Leer los elementos en forma de "Z", pero de abajo hacia arriba.
 4. **Matriz 3x4**: Leer los elementos en forma "invertida", es decir, de derecha a izquierda y de abajo hacia arriba.
 Para desarrollar mejor esto, se anexa la imagen usada como referencia de los programas:
-<img src="https://drive.google.com/file/d/1t6cKf2ngwUIu9Q_cbq6vQ8FogemFOwZZ/view" alt="Mi genial imagen" />
+![Diagrama de Matrices](https://drive.google.com/uc?export=view&id=1t6cKf2ngwUIu9Q_cbq6vQ8FogemFOwZZ)
