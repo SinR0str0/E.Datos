@@ -5,47 +5,57 @@ Programación II. Facultad de Estudios Superiores Acatlán
 Fecha de realización: 14/08/24
 
 Características del programa: 
-Se desea construir un programa que lea los elementos de una matriz estática de tamaño 4x6 tal que:
-se impriman los valores al leer la matriz en forma de "S" invertida.
-
-Ejemplo:
-1 2 3 4 5 6
-6 7 8 9 10 7
-2 3 5 4 8 8
-9 7 4 6 3 9
-Resultado: 1,2,3,4,5,6,7,10,9,8,7,6,2,3,5,4,8,8,9,3,6,4,7,9. 
+Se desea construir un programa que cuenta con las siguientes funciones de lectura de matrices estáticas:
+1) Dada una matriz 6x4, leer los elementos de la matriz en forma de "S" invertida.
+2) Dada una matriz 6x6, leer los elementos de la matriz en forma de "Z".
+3) Dada una matriz 6x6, leer los elementos de la matriz en forma de "Z" de abajo hacia arriba.
+4) Dada una matriz 3x4, leer los elementos de la matriz en forma "invertida", es decir, 
+	de derecha a izquierda y de abajo hacia arriba.
 */
 
-//PROYECTO LECTURA "S"
 #include <stdio.h>
 #include <locale.h>
 #define n 4
 #define m 6
-void configuraIdioma();
-void leerS(int mat[n][m]);
+#define x 3
 
+void configuraIdioma();
+void leerS(int mat[m][n]);
+void leerZ(int mat[m][m]);
+void leerZ2(int mat[m][m]);
+void leerA(int mat[x][n]);
 
 int main(){
-	int mat[n][m]={{1,2,3,4,5,6},{6,7,8,9,10,7},{2,3,5,4,8,8},{9,7,4,6,3,9}};
-	leerS(mat);
+	int matS[m][n]={{1,2,3,4}, {10,12,5,6}, {6,7,8,9}, {0,13,10,7}, {2,3,5,4}, {9,7,4,6}};
+	int matZ[m][m]={{1,2,3,4,5,6}, {7,8,9,10,11,12}, {13,14,15,16,17,18}, {19,20,21,22,23,24},
+	{25,26,27,28,29,30}, {31,32,33,34,35,36}};
+	int matA[x][n]={{1,2,3,4}, {5,6,7,8}, {9,10,11,12}};
+	
+	//leerS(matS);
+	//leerZ(matZ);
+	//leerZ2(matZ);
+	leerA(matA);
 	
 	return 0;
 }
 
-void leerS(int mat[n][m]){
-	//Vamos a considerar que la posición está dada por (i,j)
+void leerS(int mat[m][n]){
+	//FUNCIÓN LECTURA "S" INVERTIDA
+	/*
+	Ejemplo:
+	1   2 3 4 
+	10 12 5 6 
+	6  7  8 9
+	0 13 10 7
+	2  3  5 4
+	9  7  4 6
+	Resultado: 1,2,3,4,6,5,12,10,6,7,8,9,7,10,13,0,2,3,5,4,6,4,7,9. 
+	*/
 	int i,j=0;
 	
-	/*1. Estar en 0,0 **
-	  2. j++ y i=i -> j++, (i=i) '' *j.3* / *i.2*
-	  3. i++, j=j  -> j=j'', (i++) ''
-	  4. j--, i=i  -> j--, i=i
-	  5. i++, j=j  -> j=j, i++
-	*/
-	
-	for(i=0; i<n; i++){
+	for(i=0; i<m; i++){
 		if(i%2==0){
-			for(j=j; j<m; j++){
+			for(j=j; j<n; j++){
 				printf(" %d ", mat[i][j]);
 			}
 			j--;
@@ -55,6 +65,81 @@ void leerS(int mat[n][m]){
 				printf(" %d ", mat[i][j]);	
 			}
 			j++;
+		}
+	}
+}
+
+void leerZ(int mat[m][m]){
+	//FUNCIÓN LECTURA "Z"
+	/*
+	Ejemplo:
+	1   2  3  4  5  6
+	7   8  9 10 11 12
+	13 14 15 16 17 18
+	19 20 21 22 23 24
+	25 26 27 28 29 30
+	31 32 33 34 35 36
+	Resultado: 1,2,3,4,5,6,11,16,21,26,31,32,33,34,35,36. 
+	*/
+	int i, j;
+	for(i=0; i<m; i++){
+		if(i==0 || i==m-1){
+			for(j=0; j<m; j++){
+				printf(" %d ", mat[i][j]);
+			}
+			j--;
+		}
+		else{
+			j--;
+			printf(" %d ", mat[i][j]);
+		}
+		
+	}
+}
+
+void leerZ2(int mat[m][m]){
+	//FUNCIÓN LECTURA "Z" DE ABAJO HACIA ARRIBA
+	/*
+	Ejemplo:
+	1   2  3  4  5  6
+	7   8  9 10 11 12
+	13 14 15 16 17 18
+	19 20 21 22 23 24
+	25 26 27 28 29 30
+	31 32 33 34 35 36
+	Resultado: 36,35,34,33,32,31,26,21,16,11,6,5,4,3,2,1. 
+	*/
+	int i, j;
+	for(i=m-1; i>=0; i--){
+		if(i==0 || i==m-1){
+			for(j=m-1; j>=0; j--){
+				printf(" %d ", mat[i][j]);
+			}
+			j++;
+		}
+		else{
+			j++;
+			printf(" %d ", mat[i][j]);
+		}
+		
+	}
+}
+
+void leerA(int mat[x][n]){
+	//FUNCIÓN LECTURA INVERTIDA
+	/*
+	{{1,2,3,4}, {5,6,7,8}, {9,10,11,12}};
+	Ejemplo:
+	1  2  3  4
+	5  6  7  8
+	9 10 11 12
+	Resultado: 12,11,10,9,8,7,6,5,4,3,2,1.
+	*/
+	
+	int i,j;
+	for(i=x-1; i>=0; i--){
+		for(j=n-1; j>=0; j--){
+			printf(" %d ", mat[i][j]);
 		}
 	}
 }
