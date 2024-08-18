@@ -258,7 +258,7 @@ void leerM(int fil, int col, int mat[fil][col]){
 	
 	for(i=0; i<fil;i++){
 		for(j=0; j<col; j++){
-			printf("%d ", mat[i][j]);
+			printf("%3d ", mat[i][j]);
 		}
 		printf("\n");
 	}
