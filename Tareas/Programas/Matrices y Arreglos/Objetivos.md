@@ -1,5 +1,10 @@
 # Pt3. Lectura de Matrices
 
+## Créditos
+Elaborado por Hernández Peña Angel Adrian y Gil De Gaona Jazmín.
+Materia: Estructura de Datos.
+Escuela: Facultad de Estudios Superiores Acatlán.
+
 ## Objetivo
 
 - Comprender el funcionamiento de los bucles y bucles anidados.
