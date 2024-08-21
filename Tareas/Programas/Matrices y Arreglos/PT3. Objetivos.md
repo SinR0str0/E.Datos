@@ -4,6 +4,7 @@
 Elaborado por Hernández Peña Angel Adrian y Gil De Gaona Jazmín.
 Materia: Estructura de Datos.
 Escuela: Facultad de Estudios Superiores Acatlán.
+Entrega: 19 de agosto de 2024.
 
 ## Objetivo
 
