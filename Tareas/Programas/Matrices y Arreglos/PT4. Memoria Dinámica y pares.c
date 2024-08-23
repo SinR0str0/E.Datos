@@ -1,3 +1,17 @@
+/*
+Alumno: Hernández Peña Angel Adrian, Gil de Gaona Jazmín
+Grupo: 1301
+Programación II. Facultad de Estudios Superiores Acatlán
+Fecha de realización: 19/08/24
+Fecha de actualización: 22/08/24
+
+Características del programa: 
+Realice un programa en C que genere una lista de los primeros 10 números pares, deberá imprimirlos en orden inverso.
+Posteriormente deberá modificar el valor almacenado en el índice correspondiente al último dígito de su número 
+de cuenta por -1.
+
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -17,7 +31,7 @@ int main(int argc, char *argv[]){
 		mat[10-(i/2)]=i;
 	}
 	
-	if(argv[1] && strlen(argv[1])==9){
+	if(argv[1]){
 		x=argv[1][8]-'0';
 		if(x>=0 && x<9){
 			ult=x;
