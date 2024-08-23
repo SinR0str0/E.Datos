@@ -1,20 +1,20 @@
-# Pt3. Lectura de Matrices
+# Pt4. Memoria Dinámica
 
 ## Créditos
-Elaborado por Hernández Peña Angel Adrian y Gil De Gaona Jazmín.
-Materia: Estructura de Datos.
-Escuela: Facultad de Estudios Superiores Acatlán.
-Entrega: 19 de agosto de 2024.
+Elaborado por Hernández Peña Angel Adrian y Gil De Gaona Jazmín.  
+Materia: Estructura de Datos.  
+Escuela: Facultad de Estudios Superiores Acatlán.  
+Entrega: 30 de agosto de 2024.  
 
 ## Objetivo
 
-- Comprender el funcionamiento de los bucles y bucles anidados.
-- Aprender diferentes formas de recorrer una matriz estática.
-- Utilizar GitHub para subir archivos de código.
+- Comprender el funcionamiento de los bucles y bucles anidados.  
+- Conocer el funcionamiento de argv y argc para el ingreso de datos desde la línea de comandos.
+- Comprender el funcionamiento de las matrices dinámicas y sus usos.
 
 ## Problema
 
-Se requiere desarrollar un programa que implemente funciones para leer matrices estáticas de diferentes formas:
+FALTA DESARROLLAR! Se requiere desarrollar un programa que implemente funciones para leer matrices estáticas de diferentes formas:
 
 1. **Matriz 6x4**: Leer los elementos en forma de "S" invertida.
 2. **Matriz 6x6**: Leer los elementos en forma de "Z".
