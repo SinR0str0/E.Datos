@@ -42,5 +42,5 @@ Se requiere un programa que, dado un arreglo unidimensional de `n` elementos, si
 
 ### EJEMPLO:
 `arreglo = {0,1,3,5,8};`  
-`arreglo[-3]=3` 
-`arreglo[-2]=5`  
+`print(arreglo[-3]) -> 3`  
+`print(arreglo[-2]) -> 5`  
