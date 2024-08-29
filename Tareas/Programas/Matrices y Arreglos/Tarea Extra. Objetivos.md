@@ -19,11 +19,14 @@ Escuela: Facultad de Estudios Superiores Acatlán.
 Se necesita un programa capaz de transformar un arreglo unidimensional de 12 datos a uno bidimensional de tamaño 4x3.  
 
 ## EJEMPLO:
-A={1,2,3,4,5,6,7,8,9,10,11,12}  
-Resultado: 1  2  3  
-           4  5  6  
-           7  8  9  
-           10 11 12  
+`A={1,2,3,4,5,6,7,8,9,10,11,12}`
+Resultado:  
+```
+1  2  3  
+4  5  6  
+7  8  9  
+10 11 12  
+```
 
 # Índices Negativos
 
@@ -35,9 +38,9 @@ Resultado: 1  2  3
 
 ## Problema
 
-Se requiere un programa que, dado un arreglo unidimensional de "n" elementos, si ingreso un índice válido positivo o negativo, este me imprimirá el valor que se almacena en dicho índice del arreglo.
+Se requiere un programa que, dado un arreglo unidimensional de `n` elementos, si ingreso un índice válido positivo o negativo, este me imprimirá el valor que se almacena en dicho índice del arreglo.
 
 ### EJEMPLO:
-    arreglo = [0,1,3,5,8];  
-    arreglo[-3]=3  
-    arreglo[-2]=5  
+`arreglo = {0,1,3,5,8};`
+`arreglo[-3]=3`
+`arreglo[-2]=5`  
