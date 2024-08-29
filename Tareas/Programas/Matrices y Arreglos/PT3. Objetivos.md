@@ -22,4 +22,4 @@ Se requiere desarrollar un programa que implemente funciones para leer matrices 
 4. **Matriz 3x4**: Leer los elementos en forma "invertida", es decir, de derecha a izquierda y de abajo hacia arriba.  
 Para desarrollar mejor esto, se anexa la imagen usada como referencia de los programas:  
 
-![Diagrama de Matrices](../../diagramas/PT3.%20Diagrama%20de%20lectura%20de%20Arreglos.png)
+![Diagrama de Matrices](https://github.com/SinR0str0/E.Datos/raw/main/Tareas/Diagramas/PT3.%20Diagrama%20de%20lectura%20de%20Arreglos.png)
