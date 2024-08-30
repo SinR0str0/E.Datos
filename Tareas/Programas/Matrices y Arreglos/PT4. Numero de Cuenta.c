@@ -47,7 +47,7 @@ int main(int argc, char *argv[]){
 	else if(argc==n+1)
 		var = copiarElementos(NoCuenta, argv);
 	else{
-		printf("\n Lo siento, pero el número ingresado no es un número de cuenta válido.");
+		(argc>1)?printf("\n Lo siento, pero el número ingresado no es un número de cuenta válido."):printf("");
 		leerUsuario(NoCuenta);
 	}
 	
@@ -106,9 +106,8 @@ int leerUsuario(int **valor){
 void liberarMemoria(int **num){
 	//Limpiar y liberar memoria
 	int i,j;
-	for(i=0; i<n; i++){	
+	for(i=n-1; i>=0; i--)
 		free(num[i]);
-	}
 	free(num);
 }
 
