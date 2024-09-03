@@ -84,7 +84,7 @@ Puede ser del tipo char todo el arreglo, solo recuerde hacer el "casteo" para lo
 ```
 Además, el programa deberá solicitar el número de cuenta al usuario.  
 
-## Pt4. Listas de Caracteres
+## Pt5. Listas de Caracteres
 
 ### Fecha de entrega
 18 de septiembre de 2024.  
@@ -105,7 +105,7 @@ PENDIENTES DE ESCRIBIR.
 ## Actividades Extras.
 Los siguientes programas ya han sido terminados, sin embargo, no se ha especificado fecha de entrega para estos, por lo cual tendrán una nomenclatura diferete a la usual, pero en cuanto se soliciten, esta nomenclatura cambiará.
 
-### Matrices Unidimensionales y Bidimensionales
+### a1. Matrices Unidimensionales y Bidimensionales
 
 ### Objetivo
 
@@ -127,7 +127,7 @@ Resultado:
 10 11 12  
 ```
 
-### Índices Negativos
+### a2. Índices Negativos
 
 ### Objetivos
 
