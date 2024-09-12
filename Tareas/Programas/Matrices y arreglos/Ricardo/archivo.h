@@ -72,67 +72,6 @@ ele *eliminarDuplicados(ele *arr, int *total) {
     return unicos;
 }
 
-// Función para procesar la entrada y convertirla en la estructura ele
-ele *procesarEntrada(char *input, int *total) {
-    ele *result = (ele *)malloc(100 * sizeof(ele)); // Capacidad inicial arbitraria
-    if (!result) {
-        printf("Error al asignar memoria.\n");
-        return NULL;
-    }
-
-    int resultLen = 0;
-    int len = strlen(input);
-    char *p = input;
-
-    while (*p) {
-        if (*p == '{') {
-            p++; // Avanzar al siguiente carácter
-            if (*p == '}') {
-                // Conjunto vacío
-                result[resultLen].t = conjunto;
-                result[resultLen].data.set.arr = NULL;
-                result[resultLen].data.set.len = 0;
-                resultLen++;
-                p++;
-            } else {
-                // Leer los elementos del conjunto
-                int *tempArr = (int *)malloc(10 * sizeof(int)); // Capacidad inicial arbitraria
-                int tempLen = 0;
-                while (*p != '}' && *p) {
-                    if (isdigit(*p)) {
-                        int val = 0;
-                        while (isdigit(*p)) {
-                            val = val * 10 + (*p - '0');
-                            p++;
-                        }
-                        tempArr[tempLen++] = val;
-                    } else if (*p == ',') {
-                        p++; // Ignorar coma
-                    } else {
-                        p++;
-                    }
-                }
-                result[resultLen].t = conjunto;
-                result[resultLen].data.set.arr = (int *)malloc(tempLen * sizeof(int));
-                if (!result[resultLen].data.set.arr) {
-                    printf("Error al asignar memoria.\n");
-                    return NULL;
-                }
-                memcpy(result[resultLen].data.set.arr, tempArr, tempLen * sizeof(int));
-                result[resultLen].data.set.len = tempLen;
-                resultLen++;
-                p++; // Avanzar al siguiente carácter
-                free(tempArr);
-            }
-        } else {
-            p++;
-        }
-    }
-
-    *total = resultLen;
-    return result;
-}
-
 void imprimirEle(ele e) {
 	int i;
     if (e.t == entero) {
@@ -256,7 +195,7 @@ ele interConjuntos(ele a, ele b) {
     return result;
 }
 
-int unionBarbara(ele *PPx, int totalSubconjuntos) {
+int unionBarbara(ele *PPx, int totalSubconjuntos, int ver) {
 	int i,j,k,bandera=0;
 
     for (i = 0; i < totalSubconjuntos; i++) {
@@ -283,6 +222,15 @@ int unionBarbara(ele *PPx, int totalSubconjuntos) {
                 bandera=0;
             }
             if(!bandera){
+            	if(ver){
+	            	printf("\n ");
+	               	imprimirEle(PPx[i]);
+	               	printf(" U ");
+	               	imprimirEle(PPx[j]);
+	               	printf(" = ");
+	                imprimirEle(unionResult);
+	                printf(" y no es elemento de P(P(X))");
+	            }
             	free(unionResult.data.set.arr);
             	return 0;
 			}
@@ -296,7 +244,7 @@ int unionBarbara(ele *PPx, int totalSubconjuntos) {
     	return 0;
 }
 
-int interBarbara(ele *PPx, int totalSubconjuntos) {
+int interBarbara(ele *PPx, int totalSubconjuntos, int ver) {
 	int i,j,k;
 
     for (i = 0; i < totalSubconjuntos; i++) {
@@ -323,6 +271,15 @@ int interBarbara(ele *PPx, int totalSubconjuntos) {
                 }
             }
             if (!found) {
+            	if(ver){
+            		printf("\n ");
+	               	imprimirEle(PPx[i]);
+	               	printf(" n ");
+	               	imprimirEle(PPx[j]);
+	               	printf(" = ");
+	                imprimirEle(interResult);
+	                printf(" y no es elemento de P(P(X))");
+				}
                 free(interResult.data.set.arr);
                 return 0;  // La intersección no está en PPx
             }
@@ -462,6 +419,64 @@ ele *potenciaEle(ele *arr, int len, int *totales) {
     return potencia;
 }
 
+// Función para procesar la entrada y convertirla en la estructura ele
+ele *procesarEntrada(char *input, int *total) {
+    ele *result = (ele *)malloc(100 * sizeof(ele)); // Capacidad inicial arbitraria
+    if (!result) {
+        printf("Error al asignar memoria.\n");
+        return NULL;
+    }
+
+    int resultLen = 0;
+    int len = strlen(input);
+    char *p = input;
+
+    while (*p) {
+        if (*p == '{') {
+            p++; // Avanzar al siguiente carácter
+            if (*p == '}') {
+                agregarConjuntoVacio2(result, &resultLen);
+                p++;
+            } else {
+                // Leer los elementos del conjunto
+                int *tempArr = (int *)malloc(10 * sizeof(int)); // Capacidad inicial arbitraria
+                int tempLen = 0;
+                while (*p != '}' && *p) {
+                    if (isdigit(*p)) {
+                        int val = 0;
+                        while (isdigit(*p)) {
+                            val = val * 10 + (*p - '0');
+                            p++;
+                        }
+                        tempArr[tempLen++] = val;
+                    } else if (*p == ',') {
+                        p++; // Ignorar coma
+                    } else {
+                        p++;
+                    }
+                }
+                
+                result[resultLen].t = conjunto;
+                result[resultLen].data.set2.arr = (ele *)malloc(tempLen * sizeof(ele));
+                if (!result[resultLen].data.set2.arr) {
+                    printf("Error al asignar memoria.\n");
+                    return NULL;
+                }
+                memcpy(result[resultLen].data.set2.arr, tempArr, tempLen * sizeof(int));
+                result[resultLen].data.set2.len = tempLen;
+                resultLen++;
+                p++; // Avanzar al siguiente carácter
+                free(tempArr);
+            }
+        } else {
+            p++;
+        }
+    }
+
+    *total = resultLen;
+    return result;
+}
+
 void imprimirConjuntoPotencia2(ele *potencia, int total) {
     int i;
 	printf("{ ");
@@ -500,11 +515,11 @@ void convertir(char *cadena, int *C, int max){
     while (token != NULL && i<max) {
         C[i] = atoi(token);
         i++;
-
         // Obtener el siguiente token
         token = strtok(NULL, " ");
     }
     qsort(C,max,sizeof(int),compararEnteros);
+    
 }
 
 void string(char *cadena, int max){
@@ -533,9 +548,11 @@ void string(char *cadena, int max){
 			}
 		}
 	}
+	/*
+	printf("\n La cadena es: %s", cadena);
+	system("pause");
+	*/
 }
-
-
 
 int escanerInt(int min, int max){
 	//Función para leer números int sin errores
@@ -543,7 +560,13 @@ int escanerInt(int min, int max){
 	if(min || max){
 		while(scanf("%d", &var) != 1 || var < min || var > max){
 			fflush(stdin);
-			printf("\n Lo siento, ingrese un número entre %d y %d: ", min, max);
+			if(var>5 && max==5){
+				printf("\n No se pase profesor, mi RAM no aguantará tanto cálculo :(.");
+				printf("\n Ingrese un número menor a 5: ");
+			}
+			else{
+				printf("\n Lo siento, ingrese un número entre %d y %d: ", min, max);
+			}
 		}
 	}
 	else{
@@ -552,7 +575,7 @@ int escanerInt(int min, int max){
 			printf("\n Lo siento, ingrese un número natural válido: ");
 		}
 	}
-	
+	fflush(stdin);
 	return var;
 }
 
