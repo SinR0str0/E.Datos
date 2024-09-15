@@ -92,11 +92,23 @@ Además, el programa deberá solicitar el número de cuenta al usuario.
 ### Objetivos
 
 - Entender el uso de listas ligadas.  
-- Utilización de librerias para las actividades.  
+- Hacer uso de librerias para resolver las actividades.  
 - Comprender el uso de los apuntadores.  
+- Construir listas de enteros y caracteres.  
 
 ### Problemas
-PENDIENTES DE ESCRIBIR.  
+#### Cambiando la lista de enteros a caracteres
+**ACTIVIDAD 1:** Corregir el archivo `ex1_list.c` para aceptar caracteres y realizar lo siguiente:  
+1. Llenar la lista con al menos 10 caracteres.  
+2. Usar 4 funciones para insertar `A,W,T,M` en cualquier parte de la estructura.
+3. Usar 4 funciones para eliminar cuatro elementos distintos de la estructura.  
+
+#### Pasando los elementos de la lista como parámetros del programa
+**ACTIVIDAD 2:** Construir un programa en C que acepte parámetros alfanuméricos para ejecutar el programa bajos las siguientes restricciones:
+1. Los parámetros se toman desde la consola al ejecutar el programa y estarán separados por un espacio cada caracter.  
+2. Generar la lista con los elementos ingresados.  
+3. Deberá tener 4 funciones de inserción de los elementos: `D,R,o,9` en cualquier parte de la estructura.  
+4. Deberá tener 4 funciones para eliminar distintos nodos de la estructura.  
 
 
 
