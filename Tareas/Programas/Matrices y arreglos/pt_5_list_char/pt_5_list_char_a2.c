@@ -13,9 +13,19 @@ Desde la consola CMD, el programa recibirá parámetros y creará una lista con ell
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <locale.h>
 
 #include "list.h"
 
+void *nuevoData(char c){
+	//Función para crear datos
+	char *data;
+	data = (char *)malloc(sizeof(char));
+	if(data==NULL)
+		exit(1);
+	*data=c;
+	return data;
+}
 
 static void print_list (const List *list) {
 	// Imprimir lista
@@ -51,14 +61,37 @@ int main (int argc, char **argv){
     char *data, c;
     int i;
     
+    list_init(&list, free);
     if(argc>1){
-    	
+    	for(i=1; i<argc; i++){
+    		if (list_ins_next(&list, NULL, nuevoData(argv[i][0])) != 0)
+        		return 1;
+		}
+		print_list(&list);
 	}
-	else{
+	else
 		printf("\nLa lista se creará vacía.");
-		list_init(&list, free);
-	}
 
+	//1. Agregar D,R,o,9.
+	fprintf(stdout, "\nAgregando D al final de la lista.\n");
+	if (list_ins_next(&list, list_tail(&list), nuevoData('D')) != 0)
+        return 1;
+    print_list(&list);
+    
+    node = list_head(&list);
+    for(i=0;i<list_size(&list)-3; ++i)
+    	node = list_next(node);
+    data = list_data(node);
+    if(list_size(&list)>2)
+    	fprintf(stdout, "\nAgregando R en la antepenúltima posición de la lista.\n");
+    else
+    	fprintf(stdout, "\nAgregando R en después de %c.\n", *data);
+    if (list_ins_next(&list, node, nuevoData('R')) != 0)
+        return 1;
+    print_list(&list);
+	/*
+	1. Usar 4 funciones para insertar `D,R,o,9` en cualquier parte de la estructura.
+2. Usar 4 funciones para eliminar cuatro elementos distintos de la estructura. 
     // 1. LLenar la lista
     node = list_head(&list);
     for (c = ' '; c <= '6'; c+=2){
@@ -139,7 +172,7 @@ int main (int argc, char **argv){
     if (list_rem_next(&list, NULL, (void **)&data) != 0)
         return 1;
     print_list(&list);
-    
+    */
     // Destroying the list
     fprintf(stdout, "\nDestruyendo lista.\n");
     list_destroy(&list);
