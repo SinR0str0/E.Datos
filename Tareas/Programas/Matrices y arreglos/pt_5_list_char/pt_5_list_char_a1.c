@@ -115,6 +115,7 @@ int main (int argc, char **argv) {
     for (i = 0; i < list_size(&list)-2; ++i)
         node = list_next(node);
         
+    // 2. Eliminando elementos
     data=list_data(node);
     fprintf(stdout, "\nQuitando el nodo de la cola.\n");
     if (list_rem_next(&list, node, (void **)&data) != 0)

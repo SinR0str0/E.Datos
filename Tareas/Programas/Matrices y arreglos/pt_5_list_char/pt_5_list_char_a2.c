@@ -34,21 +34,22 @@ static void print_list (const List *list) {
 	int i;
 
     fprintf(stdout, "El tamaño de la lista es: %d\n", list_size(list));
-
-    i = 0;
-    node = list_head(list);
-
-    while (1) {
-        data = list_data(node);
-        fprintf(stdout, "list.node[%03d]=%c, %p -> %p \n", i, *data, node, node->next);
-
-        i++;
-
-        if (list_is_tail(node))
-            break;
-        else
-            node = list_next(node);
-    }
+	if (list_size(list)>0){
+	    i = 0;
+	    node = list_head(list);
+	
+	    while (1) {
+	        data = list_data(node);
+	        fprintf(stdout, "list.node[%03d]=%c, %p -> %p \n", i, *data, node, node->next);
+	
+	        i++;
+	
+	        if (list_is_tail(node))
+	            break;
+	        else
+	            node = list_next(node);
+	    }
+	}
 
    return;
 }
@@ -89,91 +90,68 @@ int main (int argc, char **argv){
     if (list_ins_next(&list, node, nuevoData('R')) != 0)
         return 1;
     print_list(&list);
-	/*
-	1. Usar 4 funciones para insertar `D,R,o,9` en cualquier parte de la estructura.
-2. Usar 4 funciones para eliminar cuatro elementos distintos de la estructura. 
-    // 1. LLenar la lista
+    
+    fprintf(stdout, "\nAgregando o en la cabeza de la lista.\n");
+    if (list_ins_next(&list, NULL, nuevoData('o')) != 0)
+        return 1;
+    print_list(&list);
+    
     node = list_head(&list);
-    for (c = ' '; c <= '6'; c+=2){
-        if ((data = (char *)malloc(sizeof(char))) == NULL)
-            return 1;
-
-        *data = c;
-
-        if (list_ins_next(&list, NULL, data) != 0)
-            return 1;
-    }
-
-    print_list(&list);
-
-	node = list_head(&list);
-    fprintf(stdout, "\nAgregando A en la cabeza de la lista.\n");
-    if (list_ins_next(&list, NULL, nuevoData('A')) != 0)
-        return 1;
-    print_list(&list);
-    for (i = 1; i < (list_size(&list)-1)/2-1; ++i)
-        node = list_next(node);
-
-    fprintf(stdout, "\nAgregando W a mitad de la lista.\n");
-    if (list_ins_next(&list, node, nuevoData('W')) != 0)
-        return 1;
-    print_list(&list);
-	
-	node = list_next(node);
-	node = list_next(node);
-	data = list_data(node);
-	
-	fprintf(stdout, "\nAgregando T después del nodo \"%c\".\n", *data);
-    if (list_ins_next(&list, node, nuevoData('T')) != 0)
-        return 1;
-    print_list(&list);
-	
-	node = list_head(&list);
-	for (i = 1; i < 5; ++i)
-        node = list_next(node);
-	
-	data = list_data(node);
-    fprintf(stdout, "\nAgregando M después del nodo \"%c\".\n", *data);
-    if (list_ins_next(&list, node, nuevoData('M')) != 0)
-        return 1;
-    print_list(&list);    
+    for(i=0;i<(list_size(&list)-1)/4;i++)
+    	node = list_next(node);
+    	
+    data = list_data(node);
     
-    node=list_head(&list);
-    for (i = 0; i < list_size(&list)-2; ++i)
-        node = list_next(node);
-        
-    data=list_data(node);
-    fprintf(stdout, "\nQuitando el nodo de la cola.\n");
-    if (list_rem_next(&list, node, (void **)&data) != 0)
-        return 1;
-    print_list(&list);
-	
-	node=list_head(&list);
-    for (i = 0; i < 3; ++i)
-        node = list_next(node);
-        
-    data=list_data(node);
-    fprintf(stdout, "\nQuitando el nodo siguiente a \"%c\"\n", *data);
-    if (list_rem_next(&list, node, (void **)&data) != 0)
+    fprintf(stdout, "\nAgregando 9 después del nodo %c.\n", *data);
+    if (list_ins_next(&list, node, nuevoData('9')) != 0)
         return 1;
     print_list(&list);
     
-    for (i; i < 7; ++i)
-        node = list_next(node);
-        
-    data=list_data(node);
-    fprintf(stdout, "\nQuitando el nodo siguiente a \"%c\"\n", *data);
-    if (list_rem_next(&list, node, (void **)&data) != 0)
-        return 1;
-    print_list(&list);
-    
-    data=list_data(list_head(&list));
-    fprintf(stdout, "\nQuitando la cabeza de la lista.\n");
+    //2. Eliminar 4 elementos
+    data = list_data(list_head(&list));
+    fprintf(stdout, "\nQuitando el nodo de la cabeza.\n");
     if (list_rem_next(&list, NULL, (void **)&data) != 0)
         return 1;
     print_list(&list);
-    */
-    // Destroying the list
+    
+    node = list_head(&list);
+    node = list_next(node);
+    
+    data = list_data(node);
+    fprintf(stdout, "\nQuitando el nodo siguiente a %c.\n",*data);
+    if (list_rem_next(&list, node, (void **)&data) != 0)
+        return 1;
+    print_list(&list);
+	
+	node = list_head(&list);
+	for(i=0;i<(list_size(&list)-1)/2;i++){
+		node = list_next(node);
+	}
+	data = list_data(node);
+	fprintf(stdout, "\nQuitando el nodo número %d.\n",i+1);
+    if (list_rem_next(&list, node, (void **)&data) != 0)
+        return 1;
+    print_list(&list);
+    
+    node = list_head(&list);
+    for(i=0;i<list_size(&list)-3;++i)
+    	node = list_next(node);
+    data = list_data(node);
+    if(!i){
+    	fprintf(stdout, "\nQuitando el último elemento.\n");
+    	if (list_rem_next(&list, NULL, (void **)&data) != 0)
+        	return 1;
+	}
+    else{
+    	fprintf(stdout, "\nQuitando el nodo siguiente a %c.\n",*data);
+    	if (list_rem_next(&list, node, (void **)&data) != 0)
+        	return 1;
+        
+    }
+    print_list(&list);
+    
+	
+    // Borrando lista
     fprintf(stdout, "\nDestruyendo lista.\n");
     list_destroy(&list);
 	
