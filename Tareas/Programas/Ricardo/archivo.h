@@ -1,5 +1,5 @@
 /*
-Archivo.h
+archivo.h
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -292,10 +292,12 @@ int interBarbara(ele *PPx, int totalSubconjuntos, int ver) {
 int isX(ele x, int *X, int max) {
 	int i;
     if (x.t == conjunto) {
+    	//printf("\n X: ");
+		//imprimirEle(x);
         if (x.data.set.len == max) {
             for (i = 0; i < x.data.set.len; i++) {
                 if (x.data.set.arr[i] != X[i]) {
-                    return 0;
+					return 0;
                 }
             }
             return 1;
@@ -560,9 +562,9 @@ int escanerInt(int min, int max){
 	if(min || max){
 		while(scanf("%d", &var) != 1 || var < min || var > max){
 			fflush(stdin);
-			if(var>5 && max==5){
+			if(var>4 && max==4){
 				printf("\n No se pase profesor, mi RAM no aguantará tanto cálculo :(.");
-				printf("\n Ingrese un número menor a 5: ");
+				printf("\n Ingrese un número natural menor a 5: ");
 			}
 			else{
 				printf("\n Lo siento, ingrese un número entre %d y %d: ", min, max);

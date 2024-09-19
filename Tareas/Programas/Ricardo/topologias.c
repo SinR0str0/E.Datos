@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 #include "archivo.h"
 
 typedef enum menu{
@@ -12,7 +13,7 @@ typedef enum menu{
 int main(){
 	configuraIdioma();
 	ele *Px, *PPx;
-	int len, totales, total2, i, *A, t, m, opcional, tec=1;
+	int len, totales, total2, i, *A, t, m, opcional, tec=1, op;
 	char *cadena;
 	do{
 		printf("\n Seleccione la función que quiere utilizar:"
@@ -23,7 +24,7 @@ int main(){
 		m=escanerInt(salir,secundaria);
 		if(m){
 			printf("\n Escriba la cantidad de elementos de X: ");
-			len=escanerInt(1,10);
+			len=escanerInt(1,25);
 			
 			printf("\n Escriba el conjunto XCN separado por espacios o comas:\n X={");
 			cadena=(char *)malloc(sizeof(char));
@@ -34,7 +35,7 @@ int main(){
 			string(cadena,1000);
 			system("cls");
 			
-			A=(int *)calloc(10,sizeof(int));
+			A=(int *)calloc(25,sizeof(int));
 			if (A == NULL) {
 		        printf("Error en la asignación de memoria.\n");
 		        return 1;
@@ -59,7 +60,7 @@ int main(){
 			imprimirConjuntoPotencia(Px, totales);
 			*/
 			
-			PPx = potenciaEle(Px,totales, &total2);
+			//PPx = potenciaEle(Px,totales, &total2);
 			
 			/*
 			printf("\n P(P(X))=");
@@ -67,88 +68,123 @@ int main(){
 			*/
 			t=0;
 			printf("\n 1. Ver las topologías.");
-			printf("\n 2. Ver las NO topologías.");
+			printf("\n 2. Ver todas las candidatas a topología.");
 			printf("\n Escriba el número de la opción deseada: ");
 			opcional = escanerInt(1,2);
 			
-			/*
-			printf("\n %d P(P(X))=", opcional);
-			imprimirConjuntoPotencia2(PPx,total2);
-			*/
-			for(i=0; i<total2; i++){
+			int total = pow(2,totales),i,j,k;
+			printf("\n TOTAL %d", total);
+			// Asignar memoria para un subconjunto
+		    ele *potencia = (ele *)malloc(sizeof(ele));
+		    if (!potencia) {
+		        fprintf(stderr, "Error al asignar memoria\n");
+		        return 1;
+		    }
+			
+		    // Generar y mostrar todos los subconjuntos
+		    for (i = 0; i < total; i++) {
+		        int tam = 0;
+		
+		        // Contar el número de elementos en el subconjunto
+		        for (j = 0; j < totales; j++) {
+		            if (i & (1 << j)) {
+		                tam++;
+		            }
+		        }
+			
+		        // Reasignar memoria para el subconjunto actual
+		        potencia->t = conjunto;
+		        potencia->data.set2.len = tam;
+		        potencia->data.set2.arr = (ele *)malloc(tam * sizeof(ele));
+		        if (!potencia->data.set2.arr) {
+		            free(potencia);
+		            printf("Error al asignar memoria\n");
+		            return 1;
+		        }
+		
+		        // Copiar elementos en el subconjunto
+		        int pos = 0;
+		        for (k = 0; k < totales; k++) {
+		            if (i & (1 << k)) {
+		                potencia->data.set2.arr[pos] = Px[k];  // Copiar elemento del arreglo original
+		                pos++;
+		            }
+		        }
+		        
+		        imprimirEle2(potencia[0]);
+				
+				int esX=0, es;
+				for(es=0;es<tam;es++){
+					if(isX(potencia->data.set2.arr[es],A,len)){
+						esX=1;
+						break;
+					}
+					
+				}
 				if(opcional==1){
-					//AQUI
-					if(PPx[i].t==conjunto && PPx[i].data.set2.len>=2 
-					&& PPx[i].data.set2.arr[0].data.set.len==0 && isX(PPx[i].data.set2.arr[PPx[i].data.set2.len-1],A,len)){
-						
-						/*
-						printf("\n Elemento: ");
-						imprimirEle2(PPx[i]);
-						*/
-						if(unionBarbara(PPx[i].data.set2.arr, PPx[i].data.set2.len,0) 
-						&& interBarbara(PPx[i].data.set2.arr, PPx[i].data.set2.len,0)){
-							/*
-							printf("\n Elemento: ");
-							imprimirEle2(PPx[i]);
-							printf("\n T: %d", t+1);
-							*/
-							printf(" %d. ", t+1);
-							imprimirEle2(PPx[i]);
-							printf(" es topología de X.\n");
-							printf(" Ya que {} es elemento de T.");
-							printf("\n X es elemento de T.");
-							printf("\n La unión arbitraria de elementos de T son elementos de P(P(X)).");
-							printf("\n La intersección finita de elementos de T son elementos de P(P(X)).");
-							t++;
-							printf("\n 1. Ver la siguiente opción. \n 2. Salir.\n Seleccione el número de la opción deseada: ");
-							tec=escanerInt(1,2);
-							if (tec==2) break;
-						}
+					if(potencia->data.set2.arr[0].data.set2.len == 0 &&
+					unionBarbara(potencia->data.set2.arr,tam,0) &&
+					interBarbara(potencia->data.set2.arr,tam,0) &&
+					isX(potencia->data.set2.arr[es],A,len)){
+						printf("\n T=");
+						imprimirEle2(potencia[0]);
+						printf("\n Si es topología ya que:");
+						printf("\n El vacío es elemento de T.");
+						printf("\n El conjunto X es elemento de T.");
+						printf("\n La unión barbara de elementos de T son elementos de T.");
+						printf("\n La intersección arbitraria de elementos de T son elementos de T.");
 					}
 				}
-				else if(opcional==2){
-					imprimirEle2(PPx[i]);
-					if(PPx[i].t==conjunto && PPx[i].data.set2.len>=2){
-						if(PPx[i].data.set2.arr[0].data.set.len==0){
-							if(isX(PPx[i].data.set2.arr[PPx[i].data.set2.len-1],A,len)){
-								if(!unionBarbara(PPx[i].data.set2.arr, PPx[i].data.set2.len,1) || !interBarbara(PPx[i].data.set2.arr, PPx[i].data.set2.len,0))
-									printf(" por lo cual no es topología de X.");
-							}
-							else{
-								printf("\n Lo siento, pero el conjunto X no está en la topología.");
-							}
-						}
-						else{
-							printf("\n No tiene al vació como elemento de la topología.");
-						}
-						
-					
-						printf("\n 1. Ver la siguiente opción. \n 2. Salir.\n Seleccione el número de la opción deseada: ");
-						tec=escanerInt(1,2);
-						if (tec==2) break;
+				else{
+					printf("\n T=");
+					imprimirEle2(potencia[0]);
+					if(potencia->data.set2.len<2){
+						printf("\n T no es topología pues no tiene suficientes elementos.");
 					}
 					else{
-						printf("\n No tiene suficientes elementos para ser topología.");
+						if(potencia->data.set2.arr[0].data.set2.len != 0){
+							printf("\n T no tiene al conjunto vacío como elemento.");
+						}
+						else{
+							if(!isX(potencia->data.set2.arr[es],A,len)){
+								printf("\n T no tiene al conjunto A como elemento.");
+							}
+							else{
+								if(!unionBarbara(potencia->data.set2.arr,tam,1)){
+									printf("\n Por lo tanto T no es topología.");
+								}
+								else{
+									if(!interBarbara(potencia->data.set2.arr,tam,1)){
+										printf("\n Por lo tanto T no es topología.");
+									}
+									else{
+										printf("\n El vacío es elemento de la topología.");
+										printf("\n El conjunto X es elemento de la topología.");
+										printf("\n La unión arbitraria son elementos de la topología.");
+										printf("\n La intersección finita de elementos en T son elementos de T.");
+										printf("\n Por lo tanto T SI es topología.");
+									}
+								}
+							}
+						}
 					}
 				}
 				
-			}
-			//printf("\n El resultado es: %d", t);
-			for(i=0;i<total2;i++){
-				if(PPx[i].t==conjunto && PPx[i].data.set2.len>0){
-					free(Px[i].data.set2.arr);
+		        // Liberar memoria para el subconjunto actual
+		        free(potencia->data.set2.arr);
+		        printf("\n\n 1. Ver siguiente candidato. \n 0. Salir. \n Escriba el número de la opción deseada: ");
+		        op=escanerInt(0,1);
+		        if(op){
+		        	system("pause");
+		        	system("cls");
 				}
-			}
-			free(PPx);
-			for (i = 0; i < totales; i++){
-		        if (Px[i].t == conjunto && Px[i].data.set.len > 0){
-		            free(Px[i].data.set.arr);
-		        }
+		        else
+		        	break;
 		    }
-			free(Px);
-			printf("\n ");
-			system("pause");
-			system("cls");
+			
+		    // Liberar memoria para el puntero
+		    free(potencia);
+
 		}
 		else if(m==2){
 			//Verificar topología
@@ -204,13 +240,17 @@ int main(){
 				}
 				
 				if(!v || !x){
-					printf("\n El vacío o el conjunto X no está en T.");
+					if(!v)
+						printf("\n El conjunto X no está en T.");
+					else
+						printf("\n El vacío no está en T.");
 					printf("\n Por lo tanto, T NO es topología de X.\n");
 					continue;
 				}
 		        
 			}
-			if(v && n && u && x){
+			printf("\n v_%d | n_%d | u_%d | x_%d",v,n,u,x);
+			if(v && !n && u && x){
 				printf("\n Por lo tanto, T es topología de X.");
 			}
 			free(cadena2);
