@@ -50,3 +50,7 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+Tareas/Programas/Matrices y Arreglos/pt_5_list_char/Makefile.win
+Tareas/Programas/Matrices y Arreglos/pt_5_list_char/list_char.layout
+*.dev
+*.layout
