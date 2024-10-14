@@ -20,7 +20,7 @@ static void print_queue(const Queue *list) {
 	node = list_head(list);
 
 	while (i < size) {
-		data = list_data(node);
+		*data = list_data(node);
 		fprintf(stdout, "queue[%03d]=%s, %p -> %p\n", i, *data, node, node->next);
 		node = list_next(node);
 	 	i++;
@@ -40,9 +40,9 @@ int main(int argc, char const *argv[]) {
 		if ((data = (char **)malloc(sizeof(char*))) == NULL)
 	    	return 1;
 
-	   		strcpy(*data,argv[i]);
-
-		if (queue_enqueue(&queue, data) != 0)
+	   	*data = argv[i];
+		printf("\n Dato es: %s", *data);
+		if (queue_enqueue(&queue, *data) != 0)
 	    	return 1;
 	}
 	print_queue(&queue);
