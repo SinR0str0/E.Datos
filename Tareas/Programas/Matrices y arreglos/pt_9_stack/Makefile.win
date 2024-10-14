@@ -1,15 +1,15 @@
-# Project: que
+# Project: stack
 # Makefile created by Dev-C++ 5.9.2
 
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = ../../../../Code/source/list.o ../../../../Code/source/queue.o pt_10_queue.o
-LINKOBJ  = ../../../../Code/source/list.o ../../../../Code/source/queue.o pt_10_queue.o
+OBJ      = pt_9_dobleStack.o ../../../../Code/source/list.o ../../../../Code/source/stack.o
+LINKOBJ  = pt_9_dobleStack.o ../../../../Code/source/list.o ../../../../Code/source/stack.o
 LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib32" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib32" -static-libgcc -m32
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include" -I"C:/Users/Angel/Downloads/Pruebas Estructuras/GitHub/Code/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include/c++" -I"C:/Users/Angel/Downloads/Pruebas Estructuras/GitHub/Code/include"
-BIN      = que.exe
+BIN      = stack.exe
 CXXFLAGS = $(CXXINCS) -m32
 CFLAGS   = $(INCS) -m32
 RM       = rm.exe -f
@@ -24,11 +24,11 @@ clean: clean-custom
 $(BIN): $(OBJ)
 	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
 
+pt_9_dobleStack.o: pt_9_dobleStack.c
+	$(CC) -c pt_9_dobleStack.c -o pt_9_dobleStack.o $(CFLAGS)
+
 ../../../../Code/source/list.o: ../../../../Code/source/list.c
 	$(CC) -c ../../../../Code/source/list.c -o ../../../../Code/source/list.o $(CFLAGS)
 
-../../../../Code/source/queue.o: ../../../../Code/source/queue.c
-	$(CC) -c ../../../../Code/source/queue.c -o ../../../../Code/source/queue.o $(CFLAGS)
-
-pt_10_queue.o: pt_10_queue.c
-	$(CC) -c pt_10_queue.c -o pt_10_queue.o $(CFLAGS)
+../../../../Code/source/stack.o: ../../../../Code/source/stack.c
+	$(CC) -c ../../../../Code/source/stack.c -o ../../../../Code/source/stack.o $(CFLAGS)

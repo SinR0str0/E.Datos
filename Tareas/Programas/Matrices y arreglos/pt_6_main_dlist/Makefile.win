@@ -1,15 +1,15 @@
-# Project: dobleLista
+# Project: dlist
 # Makefile created by Dev-C++ 5.9.2
 
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = ex1_dlist.o ../../../../Code/source/dlist.o
-LINKOBJ  = ex1_dlist.o ../../../../Code/source/dlist.o
+OBJ      = pt_6_dlist.o ../../../../Code/source/dlist.o
+LINKOBJ  = pt_6_dlist.o ../../../../Code/source/dlist.o
 LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib32" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib32" -static-libgcc -m32
-INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include" -I"C:/Users/ahang/OneDrive/Escritorio/E.Datos/Code/include"
-CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include/c++" -I"C:/Users/ahang/OneDrive/Escritorio/E.Datos/Code/include"
-BIN      = dobleLista.exe
+INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include" -I"C:/Users/Angel/Downloads/Pruebas Estructuras/GitHub/Code/include"
+CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include/c++" -I"C:/Users/Angel/Downloads/Pruebas Estructuras/GitHub/Code/include"
+BIN      = dlist.exe
 CXXFLAGS = $(CXXINCS) -m32
 CFLAGS   = $(INCS) -m32
 RM       = rm.exe -f
@@ -24,8 +24,8 @@ clean: clean-custom
 $(BIN): $(OBJ)
 	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
 
-ex1_dlist.o: ex1_dlist.c
-	$(CC) -c ex1_dlist.c -o ex1_dlist.o $(CFLAGS)
+pt_6_dlist.o: pt_6_dlist.c
+	$(CC) -c pt_6_dlist.c -o pt_6_dlist.o $(CFLAGS)
 
 ../../../../Code/source/dlist.o: ../../../../Code/source/dlist.c
 	$(CC) -c ../../../../Code/source/dlist.c -o ../../../../Code/source/dlist.o $(CFLAGS)
