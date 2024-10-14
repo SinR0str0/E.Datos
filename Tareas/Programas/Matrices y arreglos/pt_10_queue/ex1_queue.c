@@ -3,16 +3,7 @@
 #include <stdlib.h>
 
 #include "queue.h"
-#include "queue.c"
-/*
-   Print List
-*/
-
-static void print_queue (const Queue *list) {
-	queue_peek(list);
-	return;
-}
-
+//#include "queue.c"
 
 int main (int argc, char **argv) {
     Queue list;
@@ -30,14 +21,15 @@ int main (int argc, char **argv) {
 
         *data = i;
 		
-        if (enqueue(&list, data) != 0)
+        if (queue_enqueue(&list, data) != 0)
             return 1;
         fprintf(stdout, "\n Se ha agregado el elemento %03d\n", *data);
     }
 	
+	queue_dequeue(&list, data);
+	data=queue_peek(&list);
+    fprintf(stdout, "\nRemoviendo la cabeza, nueva cabeza: %03d\n", *data);
 	
-    fprintf(stdout, "\nRemoviendo la cabeza, nueva cabeza:\n", *data);
-    print_queue(&list);
 
     
     

@@ -20,7 +20,7 @@ int queue_enqueue (Queue *queue, const void *data) {
 */
 int queue_dequeue (Queue *queue, void **data) {
 	list_rem_next(queue, NULL, data);
-
+	
     return 0;
 }
 
