@@ -85,9 +85,9 @@ int main(int argc, char const *argv[]) {
 			free(data);
 	}
 	if ((d = queue_peek(&queue)) != NULL)
-		fprintf(stdout, "\nPeeking at the top element [value]=%s\n", d);
+		fprintf(stdout, "\nPeeking at the bottom element [value]=%s\n", d);
 	else
-		fprintf(stdout, "\nPeeking at the top element [value]=NULL\n");
+		fprintf(stdout, "\nPeeking at the bottom element [value]=NULL\n");
 	print_queue(&queue);
 
 	fprintf(stdout, "\nDestroying the stack\n");

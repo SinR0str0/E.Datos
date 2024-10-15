@@ -19,7 +19,7 @@ static void print_dlist (const DList *list) {
 
     while (1) {
         data = dlist_data(node);
-        fprintf(stdout, "dlist.node[%03d]=%c, %p -> %p \n", i, *data, node, node->next);
+        fprintf(stdout, "dlist.node[%03d]=%c, %p -> %p -> %p \n", i, *data, node->prev, node, node->next);
 
         i++;
 
@@ -48,8 +48,8 @@ int main (int argc, char **argv) {
 		
         if ((data = (char *)malloc(sizeof(char))) == NULL)
             return 1;
-
-        *data = argv[i][0];
+		*data = argv[i][0];
+        //*data = 92+i;
 		
         if (dlist_ins_next(&list, dlist_head(&list), data) != 0)
             return 1;
@@ -59,11 +59,10 @@ int main (int argc, char **argv) {
     print_dlist(&list);
 
     node = dlist_head(&list);
-
-    for (i = 0; i < 7; ++i)
+    for (i = 0; i < argc/2; ++i)
         node = dlist_next(node);
-
     data = dlist_data(node);
+    
     fprintf(stdout, "\nRemoving the node containing %c\n", *data);
 
     if (dlist_remove(&list, node, (void**)&data) != 0)
@@ -93,20 +92,23 @@ int main (int argc, char **argv) {
     if (dlist_ins_next(&list, dlist_head(&list), data) != 0)
         return 1;
     print_dlist(&list);    
+	if(dlist_size(&list)>=3){
+	
+    	fprintf(stdout, "\nIterating and removing the third node\n");
 
-    fprintf(stdout, "\nIterating and removing the third node\n");
+	    node = dlist_head(&list);
+    	node = dlist_next(node);
+    	node = dlist_next(node);
 
-    node = dlist_head(&list);
-    node = dlist_next(node);
-    node = dlist_next(node);
+    	if (dlist_remove(&list, node, (void **)&data) != 0)
+        	return 1;
 
-    if (dlist_remove(&list, node, (void **)&data) != 0)
-        return 1;
-
-    print_dlist(&list);
-
+    	print_dlist(&list);
+	}
     fprintf(stdout, "\nInserting \"0\" after the first node\n");
-    *data = '0';
+    if ((data = (char *)malloc(sizeof(char))) == NULL)
+    	return 1;
+	*data = '0';
     if (dlist_ins_next(&list, dlist_head(&list), data) != 0)
         return 1;
     print_dlist(&list);
