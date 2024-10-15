@@ -19,7 +19,7 @@ static void print_cdlist (const CDList *list) {
 
     while (1) {
         data = cdlist_data(node);
-        fprintf(stdout, "clist.node[%03d]=%.5f, %p -> %p \n", i, *data, node, node->next);
+        fprintf(stdout, "clist.node[%03d]=%.5f, %p -> %p -> %p \n", i, *data, node->prev, node, node->next);
 
         i++;
 
