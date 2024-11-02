@@ -47,11 +47,12 @@ int quick(DList *lista){
 	
 	DList derecha, izquierda;
 	DListNode *pivote, *node, *nodeL;
-	float *datap, *data, *data2;
+	float *datap, *data, *data2, var;
 	int i;
 	
 	pivote = dlist_head(lista);
 	datap = dlist_data(pivote);
+	var = *datap;
 	
 	dlist_init(&derecha, free);
 	dlist_init(&izquierda, free);
@@ -60,13 +61,15 @@ int quick(DList *lista){
 	node = dlist_next(node);
 	
 	// Llena la lista de menores o mayores al pivote
-	for(i=1;i<dlist_size(lista);i++){
+	while (node != NULL){
 		data = dlist_data(node);
+		
 		if ((data2 = (float *)malloc(sizeof(float))) == NULL)
         	return 2;
         (*data2) = (*data);
-		if((*data)<=(*datap)){
-			if (dlist_ins_next(&izquierda, dlist_tail(&izquierda), data) != 0)
+        
+		if((*data)<=var){
+			if (dlist_ins_next(&izquierda, dlist_tail(&izquierda), data2) != 0)
 	            return 3;
 		}
 		else{
@@ -88,45 +91,42 @@ int quick(DList *lista){
 	quick(&derecha);
 	quick(&izquierda);
 	
-	/*
-	printf("\n Lista de menores: %d para el pivote %f", list_size(&izquierda), (*datap));
+	/* Verificación de listas:
+	
+	printf("\n Lista de menores: %d para el pivote %f", dlist_size(&izquierda), (*datap));
 	print_dlist(&izquierda);
-	printf("\n Lista de mayores: %d para el pivote %f", list_size(&derecha), (*datap));
+	printf("\n Lista de mayores: %d para el pivote %f", dlist_size(&derecha), (*datap));
 	print_dlist(&derecha);
 	*/
 	
-	//Re-construir la lista:
+	
+	// Re-construir la lista:
 	node = dlist_head(&izquierda);
 	nodeL = dlist_head(lista);
+	
+	// Llenando espacios a la izquierda
 	while(node!=NULL){
 		data = dlist_data(node);
 		data2 = dlist_data(nodeL);
-		printf("\n Para:");
-		print_dlist(lista);
-		printf("\n Con:");
-		print_dlist(&izquierda);
-		printf("\n Corrigiendo: %f -> %f", *data, *data2);
 		(*data2) = (*data);
 		node = dlist_next(node);
 		nodeL= dlist_next(nodeL);
 	}
-
+	
+	// Llenando pivote
 	data2 = dlist_data(nodeL);
-	(*data2) = (*datap);
+	(*data2) = var;
 	node = dlist_head(&derecha);
 	nodeL= dlist_next(nodeL);
-	
+
+	// Llenando espacios a la derecha
 	while(node!=NULL){
 		data = dlist_data(node);
 		data2 = dlist_data(nodeL);
-		
 		(*data2) = (*data);
 		node = dlist_next(node);
 		nodeL= dlist_next(nodeL);
 	}
-	
-	printf("\n Para el pivote %f:", (*datap));
-	print_dlist(lista);
 	
 	dlist_destroy(&izquierda);
 	dlist_destroy(&derecha);
@@ -158,11 +158,10 @@ int main(int argc, char *argv[]){
             return 3;
 	}
 	
-	print_dlist(&ordenado);
 	i=quick(&ordenado);
 	print_dlist(&ordenado);
 	
 	dlist_destroy(&ordenado);
-	printf("\n Todo salio perfecto! : %d",i);
+	printf("\n Proceso terminado en: %d",i);
 	return i;
 }
