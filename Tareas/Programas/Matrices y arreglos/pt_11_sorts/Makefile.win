@@ -1,15 +1,15 @@
-# Project: Counting
+# Project: quick
 # Makefile created by Dev-C++ 5.9.2
 
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = pt_11_counting.o ../../../../Code/source/list.o
-LINKOBJ  = pt_11_counting.o ../../../../Code/source/list.o
+OBJ      = pt_11_quick.o ../../../../Code/source/list.o ../../../../Code/source/dlist.o
+LINKOBJ  = pt_11_quick.o ../../../../Code/source/list.o ../../../../Code/source/dlist.o
 LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib32" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib32" -static-libgcc -m32
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include" -I"C:/Users/Angel/Downloads/Pruebas Estructuras/GitHub/Code/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include/c++" -I"C:/Users/Angel/Downloads/Pruebas Estructuras/GitHub/Code/include"
-BIN      = Counting.exe
+BIN      = Quick.exe
 CXXFLAGS = $(CXXINCS) -m32
 CFLAGS   = $(INCS) -m32
 RM       = rm.exe -f
@@ -24,8 +24,11 @@ clean: clean-custom
 $(BIN): $(OBJ)
 	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
 
-pt_11_counting.o: pt_11_counting.c
-	$(CC) -c pt_11_counting.c -o pt_11_counting.o $(CFLAGS)
+pt_11_quick.o: pt_11_quick.c
+	$(CC) -c pt_11_quick.c -o pt_11_quick.o $(CFLAGS)
 
 ../../../../Code/source/list.o: ../../../../Code/source/list.c
 	$(CC) -c ../../../../Code/source/list.c -o ../../../../Code/source/list.o $(CFLAGS)
+
+../../../../Code/source/dlist.o: ../../../../Code/source/dlist.c
+	$(CC) -c ../../../../Code/source/dlist.c -o ../../../../Code/source/dlist.o $(CFLAGS)
