@@ -9,19 +9,15 @@ enum sentido{
 	derecha
 };
 
-static void print_cdlist (const CDList *list) {
+static void print_cdlist (const CDList *list, int n) {
 	//Función para imprimir la lista
     CDListNode *node;
-    int *data, i;
-
-    fprintf(stdout, "\n List size is %d\n", cdlist_size(list));
-
-    i = 0;
+    int *data, i=0;
     node = cdlist_head(list);
-
+	printf("\n");
     while (1) {
         data = cdlist_data(node);
-        fprintf(stdout, "%03d, ", *data);
+        fprintf(stdout, " %03d ", *data);
 
         i++;
 
@@ -92,7 +88,7 @@ int main(int argc, char *argv[]){
             return 3; //La memoria se llenó
         
     }
-	//print_cdlist(&patos); //Imprime la lista circular.
+	//print_cdlist(&patos, tam); //Imprime la lista circular.
 	
 	/* Este juego pedecirá quien será el ganador, y después se jugará para ayudar a los amigos.
 		Para el juego, se seguirá el siguiente algoritmo:
@@ -118,7 +114,7 @@ int main(int argc, char *argv[]){
 		if (cdlist_remove(&patos, (rotar==derecha)?node->prev:node->next, (void**)&data) != 0)
         	return 4; //Un eror más
         
-        //print_cdlist(&patos); //Se imprimen los sobrevivientes
+        //print_cdlist(&patos, tam); //Se imprimen los sobrevivientes
 	}
 	
 	//El nodo que sale de este while es el único sobreviviente.
@@ -151,7 +147,7 @@ int main(int argc, char *argv[]){
     
     data=cdlist_data(node);
     printf("\n Iniciando el juego con el jugador: %d", *data);
-    print_cdlist(&patos);
+    print_cdlist(&patos, tam);
 	while(cdlist_size(&patos)>1){ //Repetir mientra haya más de un jugador.
 		for(i=1; i<=ganso; i++)
 			node = (rotar==derecha)? cdlist_next(node) : cdlist_prev(node); //Avanzamos, es pato
@@ -162,7 +158,7 @@ int main(int argc, char *argv[]){
 		if (cdlist_remove(&patos, (rotar==derecha)?node->prev:node->next, (void**)&data) != 0)
         	return 4; //Un eror más
         
-        print_cdlist(&patos); //Se imprimen los sobrevivientes
+        print_cdlist(&patos, tam); //Se imprimen los sobrevivientes
 	}
 	
 	//Se dice quien es el ganador
