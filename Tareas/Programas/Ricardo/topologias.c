@@ -201,9 +201,9 @@ int main(){
 			string(cadena2,1000);
 			system("cls");
 			printf("\n Cantidad de elementos: %d"
-					"\n A={",len);
+					"\n A={ ",len);
 			for(i=0; i<len; i++){
-				printf(" %d", A[i]);
+				printf("%d ", A[i]);
 				if(i!=len-1){
 					printf(",");
 				}
@@ -214,14 +214,13 @@ int main(){
 		        // Eliminar conjuntos duplicados
 		        t = eliminarDuplicados(t, &total);
 		        for(i=0; i<total; i++){
-		        	if(isX(t[i],A,total)){
+		        	if(isX(t[i],A,len)){
 		        		x=1;
 		        		printf("\n - Tiene al conjunto A como elemento de T.");
 					}
 					else if(t[i].data.set2.len==0){
 						printf("\n - Tiene al conjunto vacío como elemento de T.");
 						v=2;
-						continue;
 					}
 				}
 				if(unionBarbara(t, total,1) && interBarbara(t, total,1)){
@@ -242,7 +241,7 @@ int main(){
 					else
 						printf("\n El vacío no está en T.");
 					printf("\n Por lo tanto, T NO es topología de A.\n");
-					printf("\n v_%d | n_%d | u_%d | x_%d",v,n,u,x);
+					//printf("\n v_%d | n_%d | u_%d | x_%d",v,n,u,x);
 					continue;
 				}
 		        

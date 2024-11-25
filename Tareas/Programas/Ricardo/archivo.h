@@ -294,8 +294,10 @@ int isX(ele x, int *X, int max) {
     if (x.t == conjunto) {
     	//printf("\n A: ");
 		//imprimirEle(x);
+		//printf("len: %d vs %d", x.data.set.len, max);
         if (x.data.set.len == max) {
-            for (i = 0; i < x.data.set.len; i++) {
+            for (i = 0; i < max; i++) {
+            	printf("%d vs %d",x.data.set.arr[i] , X[i] );
                 if (x.data.set.arr[i] != X[i]) {
 					return 0;
                 }
