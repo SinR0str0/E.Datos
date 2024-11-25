@@ -229,7 +229,7 @@ int unionBarbara(ele *PPx, int totalSubconjuntos, int ver) {
 	               	imprimirEle(PPx[j]);
 	               	printf(" = ");
 	                imprimirEle(unionResult);
-	                printf(" y no es elemento de P(P(X))");
+	                printf(" y no es elemento de P(P(A))");
 	            }
             	free(unionResult.data.set.arr);
             	return 0;
@@ -278,7 +278,7 @@ int interBarbara(ele *PPx, int totalSubconjuntos, int ver) {
 	               	imprimirEle(PPx[j]);
 	               	printf(" = ");
 	                imprimirEle(interResult);
-	                printf(" y no es elemento de P(P(X))");
+	                printf(" y no es elemento de P(P(A))");
 				}
                 free(interResult.data.set.arr);
                 return 0;  // La intersección no está en PPx
@@ -292,7 +292,7 @@ int interBarbara(ele *PPx, int totalSubconjuntos, int ver) {
 int isX(ele x, int *X, int max) {
 	int i;
     if (x.t == conjunto) {
-    	//printf("\n X: ");
+    	//printf("\n A: ");
 		//imprimirEle(x);
         if (x.data.set.len == max) {
             for (i = 0; i < x.data.set.len; i++) {
@@ -558,30 +558,43 @@ void string(char *cadena, int max){
 
 int escanerInt(int min, int max){
 	//Función para leer números int sin errores
-	int var;
+	float var;
 	if(min || max){
-		while(scanf("%d", &var) != 1 || var < min || var > max){
+		while(1){
 			fflush(stdin);
-			if(var>4 && max==4){
+			scanf("%f", &var);
+			//printf("\n var: %f ", var);
+			if ((int)var != var){
+				printf("\n Ay si, ahora resulta que el 0 no puede ser natural, pero %.3f es un entero.",var);
+				printf("\n Ingrese un número natural entre %d y %d: ", min, max);
+			}
+			else if(var>=4 && max==4){
 				printf("\n No se pase profesor, mi RAM no aguantará tanto cálculo :(.");
 				printf("\n Ingrese un número natural menor a 5: ");
 			}
-			else{
+			else if (var <(float)min || var > (float)max){
 				printf("\n Lo siento, ingrese un número entre %d y %d: ", min, max);
 			}
+			else
+				break;
 		}
 	}
 	else{
-		while(scanf("%d", &var) != 1 || var<=0){
+		while(scanf("%f", &var) != 1 || var<=0 || (int)var != var){
 			fflush(stdin);
 			printf("\n Lo siento, ingrese un número natural válido: ");
 		}
 	}
 	fflush(stdin);
-	return var;
+	return (int)var;
 }
 
 void configuraIdioma(){
 	//Cambiar idioma a español (acepta ñ y acentos)
+	struct lconv *lcPtr;
 	setlocale(LC_ALL,"spanish");
+	lcPtr = localeconv();
+	lcPtr->decimal_point = ".";
+	lcPtr->thousands_sep = ",";
+	lcPtr->grouping = "3";	
 }
