@@ -88,7 +88,7 @@ void leer(char **palabra){
 
 int main(int argc, char **argv){
 	/*Inicializamos las variables:
-	1. Ruta: Ruta del archivo .txt.
+	1. Ruta: Ruta del archivo mas el nombre del archivo con el tipo de archivo .txt.
 	2. caracter: Letra que se está iterando.
 	3. data: Data de cada letra.
 	4. archivo: Para leer un archivo.

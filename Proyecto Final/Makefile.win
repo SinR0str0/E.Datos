@@ -4,8 +4,8 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = "Programa\ 3.o" ../Code/source/dlist.o
-LINKOBJ  = "Programa 3.o" ../Code/source/dlist.o
+OBJ      = ../Code/source/dlist.o Palindromos.o
+LINKOBJ  = ../Code/source/dlist.o Palindromos.o
 LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib32" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib32" -static-libgcc -m32
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include" -I"C:/Users/ahang/OneDrive/Escritorio/E.Datos/Code/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include/c++" -I"C:/Users/ahang/OneDrive/Escritorio/E.Datos/Code/include"
@@ -24,8 +24,8 @@ clean: clean-custom
 $(BIN): $(OBJ)
 	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
 
-"Programa\ 3.o": Programa\ 3.c
-	$(CC) -c "Programa 3.c" -o "Programa 3.o" $(CFLAGS)
-
 ../Code/source/dlist.o: ../Code/source/dlist.c
 	$(CC) -c ../Code/source/dlist.c -o ../Code/source/dlist.o $(CFLAGS)
+
+Palindromos.o: Palindromos.c
+	$(CC) -c Palindromos.c -o Palindromos.o $(CFLAGS)
