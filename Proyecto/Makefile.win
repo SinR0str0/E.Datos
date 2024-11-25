@@ -1,15 +1,15 @@
-# Project: Proyecto 3
+# Project: Programa 3
 # Makefile created by Dev-C++ 5.9.2
 
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = "Programa\ 3.o" ../Code/source/cdlist.o ../Code/source/clist.o ../Code/source/dlist.o ../Code/source/list.o ../Code/source/queue.o ../Code/source/stack.o
-LINKOBJ  = "Programa 3.o" ../Code/source/cdlist.o ../Code/source/clist.o ../Code/source/dlist.o ../Code/source/list.o ../Code/source/queue.o ../Code/source/stack.o
+OBJ      = "Programa\ 3.o" ../Code/source/dlist.o
+LINKOBJ  = "Programa 3.o" ../Code/source/dlist.o
 LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib32" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib32" -static-libgcc -m32
-INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include" -I"C:/Users/Angel/Downloads/Pruebas Estructuras/GitHub/Code/include"
-CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include/c++" -I"C:/Users/Angel/Downloads/Pruebas Estructuras/GitHub/Code/include"
-BIN      = "Proyecto 3.exe"
+INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include" -I"C:/Users/ahang/OneDrive/Escritorio/E.Datos/Code/include"
+CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include/c++" -I"C:/Users/ahang/OneDrive/Escritorio/E.Datos/Code/include"
+BIN      = "Programa 3.exe"
 CXXFLAGS = $(CXXINCS) -m32
 CFLAGS   = $(INCS) -m32
 RM       = rm.exe -f
@@ -27,20 +27,5 @@ $(BIN): $(OBJ)
 "Programa\ 3.o": Programa\ 3.c
 	$(CC) -c "Programa 3.c" -o "Programa 3.o" $(CFLAGS)
 
-../Code/source/cdlist.o: ../Code/source/cdlist.c
-	$(CC) -c ../Code/source/cdlist.c -o ../Code/source/cdlist.o $(CFLAGS)
-
-../Code/source/clist.o: ../Code/source/clist.c
-	$(CC) -c ../Code/source/clist.c -o ../Code/source/clist.o $(CFLAGS)
-
 ../Code/source/dlist.o: ../Code/source/dlist.c
 	$(CC) -c ../Code/source/dlist.c -o ../Code/source/dlist.o $(CFLAGS)
-
-../Code/source/list.o: ../Code/source/list.c
-	$(CC) -c ../Code/source/list.c -o ../Code/source/list.o $(CFLAGS)
-
-../Code/source/queue.o: ../Code/source/queue.c
-	$(CC) -c ../Code/source/queue.c -o ../Code/source/queue.o $(CFLAGS)
-
-../Code/source/stack.o: ../Code/source/stack.c
-	$(CC) -c ../Code/source/stack.c -o ../Code/source/stack.o $(CFLAGS)

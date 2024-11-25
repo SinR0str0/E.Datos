@@ -237,16 +237,17 @@ int main(){
 				}
 				
 				if(!v || !x){
-					if(!v)
+					if(!x)
 						printf("\n El conjunto A no está en T.");
 					else
 						printf("\n El vacío no está en T.");
 					printf("\n Por lo tanto, T NO es topología de A.\n");
+					printf("\n v_%d | n_%d | u_%d | x_%d",v,n,u,x);
 					continue;
 				}
 		        
 			}
-			printf("\n v_%d | n_%d | u_%d | x_%d",v,n,u,x);
+			//printf("\n v_%d | n_%d | u_%d | x_%d",v,n,u,x);
 			if(v && !n && u && x){
 				printf("\n Por lo tanto, T es topología de A.");
 			}

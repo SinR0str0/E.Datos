@@ -568,7 +568,7 @@ int escanerInt(int min, int max){
 				printf("\n Ay si, ahora resulta que el 0 no puede ser natural, pero %.3f es un entero.",var);
 				printf("\n Ingrese un número natural entre %d y %d: ", min, max);
 			}
-			else if(var>=4 && max==4){
+			else if(var>4 && max==4){
 				printf("\n No se pase profesor, mi RAM no aguantará tanto cálculo :(.");
 				printf("\n Ingrese un número natural menor a 5: ");
 			}
