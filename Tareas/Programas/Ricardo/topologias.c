@@ -40,7 +40,17 @@ int main(){
 		        printf("Error en la asignación de memoria.\n");
 		        return 1;
 		    }
-			convertir(cadena, A, len);
+		    if(!esN(cadena)){
+		    	printf("\n Ingrese bien sus NÚMEROS, y comas, no otra cosa.");
+		    	free(A);
+		    	free(cadena);
+		    	continue;
+			}
+			int en=convertir(cadena, A, len);
+			if(en!=len){
+				printf("\n Su matriz se redujo.");
+				len=en;
+			}
 			//printf("\n CADENA: %s", cadena);
 		}
 		if(m==1){
@@ -199,7 +209,14 @@ int main(){
 					"\n 3. Todo elemento de la topología debe ser un subconjunto de los números naturales."
 					"\n T={ ", cadena);
 			string(cadena2,1000);
+			if(!esN(cadena2)){
+		    	printf("\n Ingrese bien sus NÚMEROS, y comas, no otra cosa.");
+		    	free(A);
+		    	free(cadena);
+		    	continue;
+			}
 			system("cls");
+			
 			printf("\n Cantidad de elementos: %d"
 					"\n A={ ",len);
 			for(i=0; i<len; i++){

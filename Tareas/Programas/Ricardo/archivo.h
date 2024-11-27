@@ -297,7 +297,7 @@ int isX(ele x, int *X, int max) {
 		//printf("len: %d vs %d", x.data.set.len, max);
         if (x.data.set.len == max) {
             for (i = 0; i < max; i++) {
-            	printf("%d vs %d",x.data.set.arr[i] , X[i] );
+            	//printf("%d vs %d",x.data.set.arr[i] , X[i] );
                 if (x.data.set.arr[i] != X[i]) {
 					return 0;
                 }
@@ -512,9 +512,10 @@ void imprimirNum(int *C, int len){
 		printf("%d ", C[i]);
 }
 
-void convertir(char *cadena, int *C, int max){
+int convertir(char *cadena, int *C, int max){
 	//Pasar letras a números:
-	int i=0;
+	int i=0,j=0, count=0;
+	int *auxiliar = (int *)malloc(max * sizeof(int));
 	char *token = strtok(cadena, " ");
     while (token != NULL && i<max) {
         C[i] = atoi(token);
@@ -522,8 +523,31 @@ void convertir(char *cadena, int *C, int max){
         // Obtener el siguiente token
         token = strtok(NULL, " ");
     }
-    qsort(C,max,sizeof(int),compararEnteros);
     
+     for (i = 0; i < max; i++) {
+        int esRepetido = 0;
+        
+        // Comprobar si el elemento ya ha sido contado
+        for (j = 0; j < i; j++) {
+            if (C[i] == C[j]) {
+                esRepetido = 1;  // Marcamos que el elemento es repetido
+                break;
+            }
+        }
+
+        if (!esRepetido) {
+            count++;  // Incrementamos el contador de elementos distintos
+        } else {
+            // Si es repetido, desplazamos los elementos a la izquierda
+            for (j = i; j < max - 1; j++) {
+                C[j] = C[j + 1];
+            }
+            max--;  // Reducimos el tamaño del arreglo
+            i--;          // Retrocedemos un paso en el índice para revisar el nuevo valor en la posición
+        }
+    }
+
+    return count;
 }
 
 void string(char *cadena, int max){
@@ -557,38 +581,106 @@ void string(char *cadena, int max){
 	system("pause");
 	*/
 }
+int tienePunto(const char *cadena) {
+    while (*cadena) {
+        if (*cadena == '.') {
+            return 1;
+        }
+        cadena++;
+    }
+    return 0;
+}
+int esNumero(const char *cadena) {
+    while (*cadena) {
+        if (!isdigit(*cadena)) {
+            return 0;
+        }
+        cadena++;
+    }
+    return 1;
+}
+
+int esN(const char *cadena) {
+    while (*cadena!=EOF && *cadena !='\n' && *cadena!='\0') {
+    	//printf("\n Comprobando: %c", *cadena);
+        if (!isdigit(*cadena) && *cadena != ',' && *cadena != ' ' && *cadena!='\0' && *cadena!='{' && *cadena!='}') {
+            //printf("\"%c\" no es nada :)",*cadena);
+			return 0;
+        }
+        cadena++;
+    }
+    return 1;
+}
 
 int escanerInt(int min, int max){
 	//Función para leer números int sin errores
-	float var;
-	if(min || max){
-		while(1){
-			fflush(stdin);
-			scanf("%f", &var);
-			//printf("\n var: %f ", var);
-			if ((int)var != var){
-				printf("\n Ay si, ahora resulta que el 0 no puede ser natural, pero %.3f es un entero.",var);
-				printf("\n Ingrese un número natural entre %d y %d: ", min, max);
-			}
-			else if(var>4 && max==4){
+	
+    int var;
+    fflush(stdin);
+    while(1){
+    	char *cadena = NULL;
+	    char c='\n';
+	    size_t tamano = 0;
+	    size_t capacidad = 0;
+	    while ((c = getchar()) != '\n' && c != EOF) {
+	        // Asegurar que hay suficiente espacio
+	        if (tamano + 1 >= capacidad) {
+	            capacidad += 1;
+	            cadena = (char*)realloc(cadena, capacidad * sizeof(char));
+	            if (cadena == NULL) {
+	                printf("Error de asignación de memoria\n");
+	                return 1;
+	            }
+	        }
+	        cadena[tamano++] = c;
+	    }
+	    if(cadena==NULL){
+			continue;
+		}
+	    cadena[tamano] = '\0';  // Finalizamos la cadena
+	    fflush(stdin);   
+		//printf("\n Cadena es: %s | %d", cadena, strlen(cadena));
+	    
+	    //printf("\n La cadena es: %s", cadena);
+	    if(tienePunto(cadena)){
+	    	printf("\n Ay si, ahora resulta que el 0 no puede ser natural, pero ese número es un entero.");
+	    	printf("\n Ingrese un número natural: ");
+			free(cadena);
+			continue;
+		}
+		if(!esNumero(cadena)){
+			printf("\n Lo siento, pero %s no es un entero.");
+			printf("\n Ingrese un número natural: ");
+	    	free(cadena);
+	    	continue;
+		}
+		var = atoi(cadena);
+		//printf("\n La cadena es: %s>%d", cadena, var);
+		if(min||max){
+			if(var>4 && max==4){
 				printf("\n No se pase profesor, mi RAM no aguantará tanto cálculo :(.");
 				printf("\n Ingrese un número natural menor a 5: ");
+				free(cadena);
+				continue;
 			}
 			else if (var <(float)min || var > (float)max){
 				printf("\n Lo siento, ingrese un número entre %d y %d: ", min, max);
+				free(cadena);
+				continue;
 			}
-			else
-				break;
 		}
-	}
-	else{
-		while(scanf("%f", &var) != 1 || var<=0 || (int)var != var){
-			fflush(stdin);
-			printf("\n Lo siento, ingrese un número natural válido: ");
+		else{
+			if(var<=0){
+				fflush(stdin);
+				printf("\n Lo siento, ingrese un número natural válido: ");
+				continue;
+			}
 		}
+		break;
 	}
+		
 	fflush(stdin);
-	return (int)var;
+	return var;
 }
 
 void configuraIdioma(){
